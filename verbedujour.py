@@ -17,8 +17,16 @@ soup = BeautifulSoup(page, "html.parser")
 
 verbe = soup.find(text="Le verbe : ").findNext('a').text
 day = datetime.datetime.now().strftime("%A").lower()
-if day == 'saturday': # randomly select another day to get random conjugaison
-    day = np.random.choice(list(conjugation.keys()))
+if day == 'saturday': # randomly select conjugaison
+    random_conjugation = np.random.choice(list(conjugation.values()))
+    conjugation[day] = random_conjugation
 
-print("Verbe du jour: ", verbe.upper())
-print("La conjugaison du jour: ", conjugation[day].upper())
+# print("Verbe du jour: ", verbe.upper())
+# print("La conjugaison du jour: ", conjugation[day].upper())
+print("{}, {}, {}, {}".format(
+        datetime.datetime.now().strftime("%Y-%m-%d"),
+        day,
+        verbe,
+        conjugation[day]
+    )
+)
